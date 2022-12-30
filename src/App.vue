@@ -1,5 +1,16 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    class="
+      flex flex-col
+      items-center
+      justify-between
+      max-w-7xl
+      my-0
+      mx-auto
+      p-8
+    "
+  >
     <img alt="Vue logo" src="https://vuejs.org/images/logo.png" />
     <DataBinding />
   </div>
@@ -8,14 +19,3 @@
 <script setup>
 import DataBinding from './components/DataBinding.vue';
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
