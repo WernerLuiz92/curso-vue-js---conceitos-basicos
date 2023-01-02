@@ -2,26 +2,32 @@
   <h1 class="text-3xl font-bold">Minha Lista</h1>
   <ul class="mt-5">
     <li
-      @click="task.isDone = !task.isDone"
+      @click="completeTask(task)"
       :class="['flex items-center', task.isDone ? 'line-through' : '']"
       v-for="(task, index) in tasks"
       :key="`${task.name}-${index}`"
     >
-      <CheckIcon class="w-5 h-5" v-if="task.isDone" />
-      <XMarkIcon class="w-5 h-5" v-else />
+      <CheckCircleIcon class="w-5 h-5" v-if="task.isDone" />
+      <MinusCircleIcon class="w-5 h-5" v-else />
       {{ task.name }}
+      <XCircleIcon class="w-5 h-5" @click.stop="removeTask(task)" />
     </li>
   </ul>
 </template>
 
 <script>
-import { CheckIcon, XMarkIcon } from '@heroicons/vue/20/solid';
+import {
+  CheckCircleIcon,
+  MinusCircleIcon,
+  XCircleIcon,
+} from '@heroicons/vue/24/outline';
 export default {
   name: 'Directives',
 
   components: {
-    CheckIcon,
-    XMarkIcon,
+    CheckCircleIcon,
+    MinusCircleIcon,
+    XCircleIcon,
   },
 
   data() {
@@ -31,6 +37,16 @@ export default {
         { name: 'Almoçar', isDone: false },
       ],
     };
+  },
+
+  methods: {
+    removeTask(task) {
+      this.tasks = this.tasks.filter((t) => t.name !== task.name);
+    },
+
+    completeTask(task) {
+      this.tasks.find((t) => t.name == task.name).isDone = !task.isDone;
+    },
   },
 };
 </script>
