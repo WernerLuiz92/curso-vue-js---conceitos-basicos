@@ -17,7 +17,7 @@
           rounded-md
           border-gray-300
           shadow-sm
-          focus:border-indigo-500 focus:ring-indigo-500
+          focus:border-ogreen-500 focus:ring-ogreen-500
           sm:text-sm
         "
         placeholder="Your text goes here"

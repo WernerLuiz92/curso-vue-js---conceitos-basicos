@@ -16,9 +16,9 @@
       <div>
         <DataBinding />
       </div>
-      <div>
+      <!-- <div>
         <Directives />
-      </div>
+      </div> -->
       <div>
         <EventsAndMethods />
       </div>

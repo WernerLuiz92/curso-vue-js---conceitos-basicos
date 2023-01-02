@@ -1,9 +1,37 @@
 <template>
   <h1 class="text-3xl font-bold">Minha Lista</h1>
+  <div class="mt-5">
+    <label for="newTask" class="block text-sm font-medium text-gray-700"
+      >Add nova tarefa</label
+    >
+    <div class="mt-1">
+      <input
+        type="text"
+        name="newTask"
+        id="newTask"
+        class="
+          block
+          w-full
+          rounded-md
+          border-gray-300
+          shadow-sm
+          focus:border-ogreen-500 focus:ring-ogreen-500
+          sm:text-sm
+        "
+        placeholder="Nova tarefa"
+        v-model="newTask"
+        v-focus
+        @keyup.enter="addTask"
+      />
+    </div>
+  </div>
   <ul class="mt-5">
     <li
       @click="completeTask(task)"
-      :class="['flex items-center', task.isDone ? 'line-through' : '']"
+      :class="[
+        'flex items-center cursor-pointer',
+        task.isDone ? 'line-through' : '',
+      ]"
       v-for="(task, index) in tasks"
       :key="`${task.name}-${index}`"
     >
@@ -21,8 +49,17 @@ import {
   MinusCircleIcon,
   XCircleIcon,
 } from '@heroicons/vue/24/outline';
+
+const focus = {
+  mounted: (el) => el.focus(),
+};
+
 export default {
-  name: 'Directives',
+  name: 'EventsAndMethods',
+
+  directives: {
+    focus,
+  },
 
   components: {
     CheckCircleIcon,
@@ -32,6 +69,7 @@ export default {
 
   data() {
     return {
+      newTask: '',
       tasks: [
         { name: 'Fazer o curso', isDone: false },
         { name: 'Almoçar', isDone: false },
@@ -40,12 +78,25 @@ export default {
   },
 
   methods: {
+    addTask() {
+      this.tasks.push({
+        name: this.newTask,
+        isDone: false,
+      });
+      this.newTask = '';
+    },
+
     removeTask(task) {
       this.tasks = this.tasks.filter((t) => t.name !== task.name);
     },
 
     completeTask(task) {
-      this.tasks.find((t) => t.name == task.name).isDone = !task.isDone;
+      this.tasks = this.tasks.map((t) => {
+        if (t.name === task.name) {
+          return { ...t, isDone: !t.isDone };
+        }
+        return { ...t };
+      });
     },
   },
 };
